@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.course.entity.Course;
 import com.course.exceptions.ApiExceptionHandler;
-import com.course.exceptions.UserNotFoundException;
+import com.course.exceptions.CourseNotFoundException;
 import com.course.payloads.CourseDto;
 import com.course.service.impl.CourseServiceImpl;
 
@@ -22,7 +22,7 @@ public class CourseController {
 	@Autowired
 	private CourseServiceImpl serviceimpl;
 
-	@PostMapping("/create-student")
+	@PostMapping("/add-course")
 	public ResponseEntity<?> saveCourse(@RequestBody Course course) throws ApiExceptionHandler {
 		try {
 			CourseDto courseObj = this.serviceimpl.createCourse(course);
@@ -34,22 +34,9 @@ public class CourseController {
 		}
 	}
 
-//	public CompletableFuture<ResponseEntity<StudentDto>> createStudentObj(@RequestBody Student std){
-//		return CompletableFuture.supplyAsync(()->{
-//			StudentDto stdObj = this.serviceimpl.createStudent(std);
-//			
-//			return ResponseEntity.status(HttpStatus.OK).body(stdObj);
-//		});
-//	}
 
-//	@GetMapping("/get-student")
-//	public ResponseEntity<StudentDto> getStudent(@PathVariable("id") int id){
-//		StudentDto studentObj = this.serviceimpl.getStudentByID(id);
-//		return ResponseEntity.status(HttpStatus.OK).body(studentObj);
-//	}
-
-	@GetMapping("/get-student/{id}")
-	public CompletableFuture<ResponseEntity<?>> getCourseData(@PathVariable("id") int id) {
+	@GetMapping("/get-course/{id}")
+	public CompletableFuture<ResponseEntity<?>> getCourse(@PathVariable("id") int id) {
 		return CompletableFuture.supplyAsync(() -> {
 			try {
 				CourseDto courseObj = this.serviceimpl.getCourseByID(id);
@@ -59,7 +46,7 @@ public class CourseController {
 					String emessage = "This data not Exit in Real";
 					return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiExceptionHandler(emessage));
 				}
-			} catch (UserNotFoundException ex) {
+			} catch (CourseNotFoundException ex) {
 				ex.printStackTrace();
 				String emessage = "This data not Exit in Real";
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiExceptionHandler(emessage));
