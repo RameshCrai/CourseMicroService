@@ -3,11 +3,9 @@ package com.course.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import com.course.entity.Course;
 import com.course.payloads.CourseDto;
-import com.course.payloads.StudentDto;
 import com.course.repository.CourseRepository;
 import com.course.service.CourseService;
 
@@ -20,10 +18,6 @@ public class CourseServiceImpl implements CourseService {
 	private ModelMapper modelMapper;
 
 
-
-//	Non-Blocking
-	@Autowired
-	private WebClient webClient;
 
 	@Override
 	public CourseDto createCourse(Course course) {

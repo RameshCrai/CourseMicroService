@@ -22,7 +22,7 @@ public class CourseController {
 	@Autowired
 	private CourseServiceImpl serviceimpl;
 
-	@PostMapping("/add-course")
+	@PostMapping("/save-address")
 	public ResponseEntity<?> saveCourse(@RequestBody Course course) throws ApiExceptionHandler {
 		try {
 			CourseDto courseObj = this.serviceimpl.createCourse(course);
